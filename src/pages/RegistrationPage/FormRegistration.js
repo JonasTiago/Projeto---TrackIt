@@ -4,7 +4,7 @@ export default function FormRegistration() {
     return (
         <FormStyle>
             <label for="">
-                <input type="text" placeholder="email"/>
+                <input type="email" placeholder="email"/>
             </label>
             <label for="">
                 <input type="password" placeholder="senha"/>
