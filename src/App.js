@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 import GlobalStyle from "./components/GlobalStyles";
 import Header from "./components/Header";
 import HabitsPage from "./pages/HabitsPage/HabitsPage";
@@ -15,6 +16,7 @@ function App() {
         <Route path="/cadastro" element={<RegistrationPage />} />
         <Route path="/habitos" element={<HabitsPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -7,10 +7,12 @@ export const BodyStyle = styled.div`
     align-items:center;
     justify-content: center;
     width:100vw;
-    height:85vh;
-    position: absolute;
+    height:100vh;
+    position: fixed;
     top: 0;
-    left:0;
+    left: 0;
+    z-index:2;
+
     img{
         margin: 26px auto 20px auto;
         position:fixed;
@@ -30,7 +32,7 @@ export const BodyStyle = styled.div`
 export const FormStyle = styled.form`
     display:flex;
     flex-direction:column;
-    margin: 250px auto 25px auto;
+    margin: 100px auto 25px auto;
     
     input{
         width:303px;
