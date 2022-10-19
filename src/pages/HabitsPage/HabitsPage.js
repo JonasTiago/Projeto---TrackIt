@@ -19,11 +19,6 @@ export default function HabitsPage() {
                     <h3>Meus hábitos</h3>
                     <button onClick={test}>+</button>
                 </div>
-                <FormHabits />
-                <Habits />
-                <Habits />
-                <Habits />
-
                 <span>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </span>

@@ -27,7 +27,6 @@ export default function FormRegistration() {
         e.preventDefault()
         const url = `${URLbase}/auth/sign-up`;
         const body = form;
-        console.log(body)
         setLoading(true)
          axios.post(url, body)
          .then(resp =>  navigate("/"))
