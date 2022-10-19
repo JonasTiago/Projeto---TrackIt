@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import FormHabits from "./FormHabits"
+import Habits from "./Habits"
 
 export default function HabitsPage() {
 
@@ -14,6 +15,10 @@ export default function HabitsPage() {
                 <button onClick={test}>+</button>
             </div>
             <FormHabits />
+            <Habits />
+            <Habits />
+            <Habits />
+
             <span>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </span>
@@ -25,13 +30,15 @@ const HabitsPageStyle = styled.div`
     display:flex;
     justify-content:center;
     flex-direction:column;
+    align-items:center;
     padding:5px 17px;
 
     div{
         display:flex;
         justify-content:space-between;
-        align-items:center;
-        margin:15px 0 17px 0; 
+        /* align-items:center; */
+        margin:5px 0 10px 0;
+        width:340px; 
 
         h2{
             color:#126BA5;
@@ -58,6 +65,8 @@ const HabitsPageStyle = styled.div`
         color:#666666;
         font-family: 'Lexend Deca',sans-serif;
         line-height:22px;
+        margin-top:20px;
         margin-bottom:110px;
+        width:340px;
     }
 `

@@ -4,11 +4,12 @@ const GlobalStyle = createGlobalStyle`
 
 *{
     box-sizing:border-box;
-	font-family: 'Lexend Deca', sans-serif;
 }
 
 body{
 	background-color:#E5E5E5;
+	font-family: 'Lexend Deca', sans-serif;
+
 }
 
 a{

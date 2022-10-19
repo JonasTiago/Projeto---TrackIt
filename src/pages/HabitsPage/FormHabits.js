@@ -34,13 +34,12 @@ const FormHabitsStyle = styled.div`
     justify-content:center;
     width:340px;
     height:180px;
-    margin:0;
-    padding: 0 15px;
+    margin:auto;
     border-radius:5px;
 
     form{
-        margin:0;
-        padding:0;
+        margin:auto;
+        padding:auto;
     }
 
     label:nth-child(2){
@@ -50,7 +49,7 @@ const FormHabitsStyle = styled.div`
             font-size:19.98px;
             font-weight:400;
             text-align: center;
-            padding: 0;
+            padding: 3.5px;
             color:#DBDBDB;
             border:1px solid #DBDBDB;
             background-color:#fff;
