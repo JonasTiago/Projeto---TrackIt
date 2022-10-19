@@ -1,17 +1,24 @@
 import styled from "styled-components"
 import TodayHabit from "./TodayHabit"
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
 
 export default function TodayPage() {
     return (
-        <TodayStyle>
-            <h3>Segunda, 17/05</h3>
-            <span>Nenhum hábito concluído ainda</span>
-            <div>
-                <TodayHabit />
-                <TodayHabit />
-                <TodayHabit />
-            </div>
-        </TodayStyle>
+        <>
+            <Header userImg={'https://s2.glbimg.com/5IEojOCGN6bgFV5L2K_RKB5dtvk=/e.glbimg.com/og/ed/f/original/2020/03/31/cat-4548812_960_720.jpg'} />
+            <TodayStyle>
+                <h3>Segunda, 17/05</h3>
+                <span>Nenhum hábito concluído ainda</span>
+                <div>
+                    <TodayHabit />
+                    <TodayHabit />
+                    <TodayHabit />
+                </div>
+            </TodayStyle>
+            <Footer />
+        </>
     )
 }
 
@@ -25,7 +32,8 @@ const TodayStyle = styled.div`
     h3{
         font-size:22.98px;
         color:#126BA5;
-        margin-bottom: 5px;
+        margin-bottom:5px;
+        margin-top:5px;
     }
 
     span{

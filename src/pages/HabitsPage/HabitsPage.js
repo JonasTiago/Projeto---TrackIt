@@ -1,6 +1,9 @@
 import styled from "styled-components"
 import FormHabits from "./FormHabits"
 import Habits from "./Habits"
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
 
 export default function HabitsPage() {
 
@@ -9,20 +12,24 @@ export default function HabitsPage() {
     }
 
     return (
-        <HabitsPageStyle>
-            <div>
-                <h2>Meus hábitos</h2>
-                <button onClick={test}>+</button>
-            </div>
-            <FormHabits />
-            <Habits />
-            <Habits />
-            <Habits />
+        <>
+            <Header userImg={'https://s2.glbimg.com/5IEojOCGN6bgFV5L2K_RKB5dtvk=/e.glbimg.com/og/ed/f/original/2020/03/31/cat-4548812_960_720.jpg'} />
+            <HabitsPageStyle>
+                <div>
+                    <h3>Meus hábitos</h3>
+                    <button onClick={test}>+</button>
+                </div>
+                <FormHabits />
+                <Habits />
+                <Habits />
+                <Habits />
 
-            <span>
-                Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-            </span>
-        </HabitsPageStyle>
+                <span>
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                </span>
+            </HabitsPageStyle>
+            <Footer />
+        </>
     )
 }
 
@@ -32,6 +39,8 @@ const HabitsPageStyle = styled.div`
     flex-direction:column;
     align-items:center;
     padding:5px 17px;
+    font-family: 'Lexend Deca',sans-serif;
+    font-weight:400;
 
     div{
         display:flex;
@@ -40,9 +49,12 @@ const HabitsPageStyle = styled.div`
         margin:5px 0 10px 0;
         width:340px; 
 
-        h2{
+        h3{
             color:#126BA5;
-            font-size:23px;
+            font-size:22.98px;
+            margin-bottom:5px;
+            margin-top:5px;
+
         }
 
         button{
