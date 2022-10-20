@@ -39,7 +39,6 @@ export default function FormLogin({ setUser }) {
                 .catch(resp => {
                     alert(resp.response.data.message)
                     setLoading(false)
-
                 })
         }, 1000)
     }

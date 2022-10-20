@@ -7,12 +7,13 @@ import { useContext, useEffect, useState } from "react";
 import { UserAuthContext } from "../../constants/userAuth";
 import { URLbase } from "../../constants/URL";
 import axios from "axios";
-
+import { SEMANA } from "../../constants/Semana"
 
 export default function HabitsPage() {
     const { user } = useContext(UserAuthContext);
     const [add, setAdd] = useState(false)
     const [habits, setHabits] = useState(false)
+    const [reload, setReload] = useState(false)
     const useAtivo = user.token;
 
     function togglerForm() {
@@ -24,31 +25,45 @@ export default function HabitsPage() {
         axios.get(url, { headers: { Authorization: `Bearer ${user.token}` } })
             .then(resp => {
                 setHabits(resp.data)
+                setReload(false)
             })
             .catch(resp => console.log(resp))
     }
-        , [])
-        
+        , [reload])
+
     return (
         <>
             <Header userImg={user.image} />
-            <HabitsPageStyle>
+            <HabitsPageStyle visible={add}>
                 <div>
                     <h3>Meus hábitos</h3>
                     <button onClick={togglerForm}>+</button>
                 </div>
-                {add && <FormHabits
-                    setAdd={setAdd}
-                    useAtivo={useAtivo}
-                    togglerForm={togglerForm}
-                />}
-                { habits.length > 0 ?
-                    habits.map(hab => <Habits key={hab.id} name={hab.name} days={hab.days} />)
-                    :
-                    <span>
-                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                    </span>
-                }
+                <div >
+                    <FormHabits
+                        setReload={setReload}
+                        SEMANA={SEMANA}
+                        setAdd={setAdd}
+                        useAtivo={useAtivo}
+                        togglerForm={togglerForm}
+                    />
+                </div>
+                <>
+                    {habits.length > 0 ?
+                        habits.map(hab => <Habits
+                            setReload={setReload}
+                            key={hab.id}
+                            useAtivo={useAtivo}
+                            id={hab.id}
+                            name={hab.name}
+                            days={hab.days}
+                            SEMANA={SEMANA} />)
+                        :
+                        <span>
+                            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                        </span>
+                    }
+                </>
 
             </HabitsPageStyle>
             <Footer />
@@ -80,7 +95,7 @@ const HabitsPageStyle = styled.div`
 
         }
 
-        button{
+        > button{
             width:40px;
             height:35px;
             background-color:#52B6FF;
@@ -92,6 +107,10 @@ const HabitsPageStyle = styled.div`
             border-radius:4.5px;
             color:#fff;
         }
+    }
+
+    > div:nth-child(2){
+        display: ${props => props.visible ? '' : 'none'};
     }
 
     span{

@@ -1,25 +1,40 @@
+import axios from "axios"
+import { useState } from "react"
 import styled from "styled-components"
 import trash from "../../assets/images/trash.svg"
 import trashIn from "../../assets/images/trash2.svg"
+import { URLbase } from "../../constants/URL"
 
+export default function Habits({setReload, useAtivo, id, name, days, SEMANA}) {
 
+    function deleteHabit(idHabit){
+        const headers = {
+            'Authorization': `Bearer ${useAtivo}`
+        }
+        const url = `${URLbase}/habits/${idHabit}`
 
-export default function Habits({name, days}) {
+        axios.delete(url, {headers})
+        .then(resp => {
+            console.log(resp)
+            setReload(true)
+        })
+        .catch(resp => console.log(resp.response.data.message))
+        
+    }
+
     return (
         <HabitsStyle>
                 <h4>{name}</h4>
-                <TrashStyle>
+                <TrashStyle onClick={ () => window.confirm("Deseja deletar esse habito?") && deleteHabit(id)}>
                     <img src={trash}/>
                     <img src={trashIn}/>
                 </TrashStyle>
             <label>
-                <input type="submit" value="D" />
-                <input type="submit" value="S" />
-                <input type="submit" value="T" />
-                <input type="submit" value="Q" />
-                <input type="submit" value="Q" />
-                <input type="submit" value="S" />
-                <input type="submit" value="S" />
+                {SEMANA.map(day => <button 
+                key={day.id}
+                type="button"
+                disabled = {days.includes(day.id)}
+                >{day.name}</button>)}
             </label>
         </HabitsStyle>
     )
@@ -34,7 +49,7 @@ const HabitsStyle = styled.div`
     padding:14px;
     position:relative;
     border-radius:5px;
-    margin:0;
+    margin:10px 0 0 0;
 
     h4{
         font-size:19.98px;
@@ -48,7 +63,7 @@ const HabitsStyle = styled.div`
     }
 
     label{
-        input{
+       > button{
             width:30px;
             height:30px;
             font-size:19.98px;
@@ -62,13 +77,17 @@ const HabitsStyle = styled.div`
             margin: 0px 4px 20px 0;
 
         }
+       > button:disabled{
+            background-color:#DBDBDB;
+            color:#fff;
+        }
     }
 `
 
 const TrashStyle = styled.div`
     position:absolute;
-    top:0;
-    right:0;
+    top:5px;
+    right:5px;
 
     img:first-child{
         position:absolute;

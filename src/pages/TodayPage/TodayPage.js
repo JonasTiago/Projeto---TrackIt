@@ -7,7 +7,6 @@ import { UserAuthContext } from "../../constants/userAuth";
 
 export default function TodayPage() {
     const {user} = useContext(UserAuthContext);
-    console.log(user)
 
     return (
         <>
