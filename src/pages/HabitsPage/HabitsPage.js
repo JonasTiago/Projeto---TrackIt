@@ -3,25 +3,53 @@ import FormHabits from "./FormHabits"
 import Habits from "./Habits"
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import { useContext, useEffect, useState } from "react";
+import { UserAuthContext } from "../../constants/userAuth";
+import { URLbase } from "../../constants/URL";
+import axios from "axios";
 
 
 export default function HabitsPage() {
+    const { user } = useContext(UserAuthContext);
+    const [add, setAdd] = useState(false)
+    const [habits, setHabits] = useState(false)
+    const useAtivo = user.token;
 
-    function test() {
-        console.log('oi')
+    function togglerForm() {
+        setAdd(add ? false : true)
     }
 
+    useEffect(() => {
+        const url = `${URLbase}/habits`
+        axios.get(url, { headers: { Authorization: `Bearer ${user.token}` } })
+            .then(resp => {
+                setHabits(resp.data)
+            })
+            .catch(resp => console.log(resp))
+    }
+        , [])
+        
     return (
         <>
-            <Header userImg={'https://s2.glbimg.com/5IEojOCGN6bgFV5L2K_RKB5dtvk=/e.glbimg.com/og/ed/f/original/2020/03/31/cat-4548812_960_720.jpg'} />
+            <Header userImg={user.image} />
             <HabitsPageStyle>
                 <div>
                     <h3>Meus hábitos</h3>
-                    <button onClick={test}>+</button>
+                    <button onClick={togglerForm}>+</button>
                 </div>
-                <span>
-                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                </span>
+                {add && <FormHabits
+                    setAdd={setAdd}
+                    useAtivo={useAtivo}
+                    togglerForm={togglerForm}
+                />}
+                { habits.length > 0 ?
+                    habits.map(hab => <Habits key={hab.id} name={hab.name} days={hab.days} />)
+                    :
+                    <span>
+                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                    </span>
+                }
+
             </HabitsPageStyle>
             <Footer />
         </>

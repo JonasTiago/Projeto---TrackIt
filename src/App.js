@@ -6,8 +6,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import TodayPage from "./pages/TodayPage/TodayPage";
 
-
-
 function App() {
 
   return (

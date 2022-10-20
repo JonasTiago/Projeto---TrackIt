@@ -8,8 +8,6 @@ import FormLogin from "./FormLogin"
 export default function LoginPage() {
     const {user, setUser} = useContext(UserAuthContext) 
 
-    console.log(user.nome)
-
     return (
         <BodyStyle>
             <img src={Logo} />

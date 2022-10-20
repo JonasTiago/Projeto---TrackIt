@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
+
 export const BodyStyle = styled.div`
     background-color:#fff;
     display:flex;
@@ -44,10 +45,15 @@ export const FormStyle = styled.form`
         font-weight:400;
         padding:5px 11px;
     }
+
     input::placeholder {
         color: #dbdbdb;
     }
 
+    input:disabled{
+        color:#AFAFAF;
+        background-color:#F2F2F2;
+    }
 
     label:last-child > input{
         background-color: #52B6FF;

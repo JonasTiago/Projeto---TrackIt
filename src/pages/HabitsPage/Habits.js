@@ -4,10 +4,10 @@ import trashIn from "../../assets/images/trash2.svg"
 
 
 
-export default function Habits() {
+export default function Habits({name, days}) {
     return (
         <HabitsStyle>
-                <h3>Ler 1 capítulo de livro</h3>
+                <h4>{name}</h4>
                 <TrashStyle>
                     <img src={trash}/>
                     <img src={trashIn}/>
@@ -36,7 +36,7 @@ const HabitsStyle = styled.div`
     border-radius:5px;
     margin:0;
 
-    h3{
+    h4{
         font-size:19.98px;
         width:90%;
         margin-top:5px;
@@ -72,15 +72,15 @@ const TrashStyle = styled.div`
 
     img:first-child{
         position:absolute;
-        top:0px;
-        right:5.3px;
+        top:2px;
+        right:7.3px;
         width:16px;
     }
 
     img:last-child{
         position:absolute;
-        top:5.55px;
-        right:9.5px;
+        top:7.55px;
+        right:11.5px;
         width:8px;
     }
 `
