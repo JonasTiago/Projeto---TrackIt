@@ -11,7 +11,7 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
         name: "",
         days: []
     })
-
+    
     function fillIn(e) {
         setForm({
             ...form,
@@ -62,6 +62,8 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
                         placeholder="nome do hábito"
                         onChange={fillIn}
                         required
+                        autoComplete={'off'}
+                        maxLength="25"
                         disabled={loading}
                     />
                 </label>

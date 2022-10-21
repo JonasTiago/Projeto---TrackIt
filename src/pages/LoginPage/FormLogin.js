@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { FormStyle } from "../../constants/styles"
 import { URLbase } from "../../constants/URL";
@@ -23,6 +23,16 @@ export default function FormLogin({ setUser }) {
         });
     };
 
+    
+    useEffect(() => {
+        if (localStorage.getItem('UserOn')) {
+            const dadosDeserializados = JSON.parse(localStorage.getItem('UserOn'))
+            console.log(dadosDeserializados)
+             setUser(dadosDeserializados)
+             setTimeout( navigate('/hoje'), 5000)
+        }
+    }, [])
+
     function login(e) {
         e.preventDefault()
         setLoading(true)
@@ -33,8 +43,10 @@ export default function FormLogin({ setUser }) {
         setTimeout(() => {
             axios.post(url, body)
                 .then(resp => {
-                    setUser(resp.data)
-                    navigate('/hoje')
+                    setUser(resp.data);
+                    const dadosSerializados = JSON.stringify(resp.data);
+                    localStorage.setItem('UserOn', dadosSerializados);
+                    navigate('/hoje');
                 })
                 .catch(resp => {
                     alert(resp.response.data.message)
@@ -54,7 +66,6 @@ export default function FormLogin({ setUser }) {
                     placeholder="email"
                     disabled={loading}
                     required
-                    focus
                 />
             </label>
             <label htmlFor="password">

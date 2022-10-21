@@ -14,7 +14,7 @@ export default function Habits({ setReload, useAtivo, id, name, days, SEMANA }) 
 
         axios.delete(url, { headers })
             .then(resp => {
-                console.log(resp)
+                
                 setReload(true)
             })
             .catch(resp => console.log(resp.response.data.message))

@@ -20,7 +20,6 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
             const body = { done: true }
             axios.post(`${url}/check`, body, { headers })
                 .then(resp => {
-                    console.log(resp)
                     setReload(true)
                 }) //tudo ok
                 .catch(resp => console.log('erro', resp.data))//quando da erro, mudar depois
@@ -40,8 +39,8 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
         <HabitStyle estado={click} record={currentSequence == highestSequence}>
             <div>
                 <h4>{name}</h4>
-                <p>Sequência atual: <span>{currentSequence} dias</span></p>
-                <p>Seu recorde: <span>{highestSequence} dias</span></p>
+                <p>Sequência atual:  <span>{currentSequence} dias</span></p>
+                <p>Seu recorde:  <span>{highestSequence} dias</span></p>
             </div>
             <button onClick={() => {
                 concluirHabito(id, done)
@@ -84,7 +83,8 @@ const HabitStyle = styled.div`
                 > span{
                 color:${props => props.estado ? "#8FC549" : "#bababa"};
                 font-size:12.98px;
-                margin-bottom: 3px;
+                margin: 0 0 3px  0;
+                
                 }
             
         }
@@ -96,7 +96,7 @@ const HabitStyle = styled.div`
                 > span{
                 color:${props => props.record ? "#8FC549" : "#bababa"};
                 font-size:12.98px;
-                margin-bottom: 3px;
+                margin: 0 0 3px  0;
                 }
         }
     }

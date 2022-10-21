@@ -47,7 +47,7 @@ export default function TodayPage() {
         <>
             <Header userImg={user.image} />
             <TodayStyle progress={!(performance > 1)}>
-                {SEMANA.map(d => d.id === today && <h3> {d.nickName}, {todaydate}</h3>)}
+                {SEMANA.map(d => d.id === today && <h3 key={d.id}> {d.nickName}, {todaydate}</h3>)}
                 {!(performance > 1) ? <span>Nenhum hábito concluído ainda</span>
                     : <span>{performance}% dos hábitos concluídos</span>}
                 <div>
