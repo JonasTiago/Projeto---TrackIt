@@ -6,26 +6,34 @@ export const BodyStyle = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content: center;
+    justify-content: space-between;
     width:100vw;
     height:100vh;
-    position: fixed;
+    padding-top:25px;
+    /* position: fixed;
     top: 0;
     left: 0;
-    z-index:2;
+    z-index:2; */
 
     img{
-        margin: 26px auto 20px auto;
-        position:fixed;
-        top:45px;
-        bottom: 150px;
+        width:180px;
+        height:86px;
+        flex-grow:2;
     }
 
-    a{
+    
+
+    div{
+        flex-grow: 2;
+        text-align:center;
+
+        > a{
         color: #52b6ff;
         font-weight:400;
         font-size:18px;
         text-decoration:underline;
+        margin-top:10px;
+    }
     }
 
 `
@@ -33,7 +41,7 @@ export const BodyStyle = styled.div`
 export const FormStyle = styled.form`
     display:flex;
     flex-direction:column;
-    margin: 100px auto 25px auto;
+    margin: 0px auto 15px auto;
     
     input{
         width:303px;

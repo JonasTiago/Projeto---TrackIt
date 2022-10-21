@@ -66,16 +66,16 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
                     />
                 </label>
                 <label htmlFor="days">
-                    {SEMANA.map(d => <ButtonStyle
+                    {SEMANA.map(d => <ButtonSemanaStyle
                         clic={form.days.includes(d.id) ? true : false}
                         disabled={loading}
                         key={d.id}
                         type="button"
                         name='days'
                         value={d.id}
-                        onClick={(e) => fillDays(d.id)}>
+                        onClick={(e) => fillDays(d.id)} required>
                         {d.name}
-                    </ButtonStyle>)}
+                    </ButtonSemanaStyle>)}
                 </label>
                 <label htmlFor="click">
                     <input type="button" name="click" value="Cancelar" onClick={() => setAdd(false)} />
@@ -85,7 +85,7 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
                         <BntStyle disabled>
                             <ThreeDots
                                 height="20"
-                                width="50"
+                                width="45"
                                 radius="9"
                                 color="#fff"
                                 ariaLabel="three-dots-loading"
@@ -162,7 +162,7 @@ const FormHabitsStyle = styled.div`
     } 
 `;
 
-const ButtonStyle = styled.button`
+const ButtonSemanaStyle = styled.button`
         width:30px;
         height:30px;
         font-size:19.98px;
@@ -172,6 +172,7 @@ const ButtonStyle = styled.button`
         border:1px solid #DBDBDB;
         background-color: ${props => !props.clic ? '#fff' : '#DBDBDB'};
         margin: 8px 4px 20px 0;
+        border-radius:5px;
         
         
        &&:disabled{
@@ -187,12 +188,15 @@ const BntStyle = styled.button`
             height:35px;
             border-radius:5px;
             border:none;
-            padding-left:17px;
+            padding-left:20px;
+            margin:2px 0 0 0;
             padding-top:2px;
+             
 
-            >div{
-                
-                width:84px;
-                height:35px;
+
+            > div{
+                max-width:50px;
+                height:30px;
+                margin:8px 0 0 0;
             }
 `;

@@ -2,9 +2,11 @@ import styled from "styled-components";
 import ceta from "../../assets/images/Vector.svg";
 import axios from "axios";
 import { URLbase } from "../../constants/URL";
+import { useState } from "react";
 
 export default function TodayHabit({ hab, useAtivo, setReload }) {
     const { currentSequence, done, highestSequence, name, id } = hab;
+    const [click, setClick] = useState(done)
 
     function concluirHabito(idHabt, doneHabt) {
 
@@ -35,20 +37,23 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
 
 
     return (
-        <TodayHabitStyle estado={done} record={currentSequence == highestSequence}>
+        <HabitStyle estado={click} record={currentSequence == highestSequence}>
             <div>
                 <h4>{name}</h4>
                 <p>Sequência atual: <span>{currentSequence} dias</span></p>
                 <p>Seu recorde: <span>{highestSequence} dias</span></p>
             </div>
-            <button onClick={() => concluirHabito(id, done)}>
+            <button onClick={() => {
+                concluirHabito(id, done)
+                setClick(click ? false : true)
+                }}>
                 <img src={ceta} />
             </button>
-        </TodayHabitStyle>
+        </HabitStyle>
     )
 };
 
-const TodayHabitStyle = styled.div`
+const HabitStyle = styled.div`
     width:340px;
     height:94px;
     background-color:#fff;
@@ -56,10 +61,10 @@ const TodayHabitStyle = styled.div`
     display:flex;
     justify-content: space-between;
     padding:13px 10px;
-    margin:0;
+    margin:10px auto;
     border-radius:5px;
 
-    div{
+    >div{
         display:flex;
         flex-direction:column;
         width:75%;
@@ -96,17 +101,19 @@ const TodayHabitStyle = styled.div`
         }
     }
 
-    button{
+   > button{
         width:69px;
         height:69px;
         border:none;
         border-radius:5px;
         margin:0;
+        padding:0;
         background-color: ${props => props.estado ? '#8FC549' : '#E7E7E7'} ;
         
         img{
             width:35.05px;
-            height:28px;
+            height:28px;margin:0;
+        padding:0;
         }
     }
 `;

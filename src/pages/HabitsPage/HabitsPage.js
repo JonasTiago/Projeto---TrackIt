@@ -86,7 +86,7 @@ const HabitsPageStyle = styled.div`
         display:flex;
         justify-content:space-between;
         /* align-items:center; */
-        margin:5px 0 10px 0;
+        margin:5px 0 8px 0;
         width:340px; 
 
         h3{
@@ -104,7 +104,6 @@ const HabitsPageStyle = styled.div`
             font-size:27px;
             font-family: 'Lexend Deca',sans-serif;
             font-weight:400;
-            text-align:center;
             border:none;
             border-radius:4.5px;
             color:#fff;

@@ -4,35 +4,35 @@ import trash from "../../assets/images/trash.svg"
 import trashIn from "../../assets/images/trash2.svg"
 import { URLbase } from "../../constants/URL"
 
-export default function Habits({setReload, useAtivo, id, name, days, SEMANA}) {
+export default function Habits({ setReload, useAtivo, id, name, days, SEMANA }) {
 
-    function deleteHabit(idHabit){
+    function deleteHabit(idHabit) {
         const headers = {
             'Authorization': `Bearer ${useAtivo}`
         }
         const url = `${URLbase}/habits/${idHabit}`
 
-        axios.delete(url, {headers})
-        .then(resp => {
-            console.log(resp)
-            setReload(true)
-        })
-        .catch(resp => console.log(resp.response.data.message))
-        
+        axios.delete(url, { headers })
+            .then(resp => {
+                console.log(resp)
+                setReload(true)
+            })
+            .catch(resp => console.log(resp.response.data.message))
+
     }
 
     return (
         <HabitsStyle>
-                <h4>{name}</h4>
-                <TrashStyle onClick={ () => window.confirm("Deseja deletar esse habito?") && deleteHabit(id)}>
-                    <img src={trash}/>
-                    <img src={trashIn}/>
-                </TrashStyle>
+            <h4>{name}</h4>
+            <TrashStyle onClick={() => window.confirm("Deseja deletar esse habito?") && deleteHabit(id)}>
+                <img src={trash} />
+                <img src={trashIn} />
+            </TrashStyle>
             <label>
-                {SEMANA.map(day => <button 
-                key={day.id}
-                type="button"
-                disabled = {days.includes(day.id)}
+                {SEMANA.map(day => <button
+                    key={day.id}
+                    type="button"
+                    disabled={days.includes(day.id)}
                 >{day.name}</button>)}
             </label>
         </HabitsStyle>
@@ -54,7 +54,7 @@ const HabitsStyle = styled.div`
         font-size:19.98px;
         width:90%;
         margin-top:5px;
-        margin-bottom:8px;
+        margin-bottom:9px;
         font-family: 'Lexend Deca',sans-serif;
         font-weight:400;
         color:#666666;

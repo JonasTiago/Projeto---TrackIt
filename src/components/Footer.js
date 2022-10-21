@@ -8,7 +8,7 @@ import { UserAuthContext } from "../constants/userAuth";
 
 export default function Footer({}) {
     const { performance } = useContext(UserAuthContext);
-
+    console.log(performance)
     return (
 
         <FooterStyle>

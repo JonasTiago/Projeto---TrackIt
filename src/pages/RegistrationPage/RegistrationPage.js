@@ -7,8 +7,10 @@ export default function RegistrationPage() {
     return (
         <BodyStyle>
             <img src={Logo} />
-            <FormRegistration />
-            <Link to={"/"}>Já tem uma conta? Faça login!</Link>
+            <div>
+                <FormRegistration />
+                <Link to={"/"}>Já tem uma conta? Faça login!</Link>
+            </div>
         </BodyStyle>
     )
 }

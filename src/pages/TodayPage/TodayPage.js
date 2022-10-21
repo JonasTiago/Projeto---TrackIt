@@ -52,7 +52,7 @@ export default function TodayPage() {
                     : <span>{performance}% dos hábitos concluídos</span>}
                 <div>
                     {habitsDay.map(hab =>
-                        <TodayHabit key={hab.id} hab={hab} useAtivo={useAtivo} setReload={setReload} />)}
+                        <TodayHabit key={hab.id} hab={hab} useAtivo={useAtivo} setReload={setReload}/>)}
                 </div>
             </TodayStyle>
             <Footer />
@@ -61,29 +61,30 @@ export default function TodayPage() {
 };
 
 const TodayStyle = styled.div`
-    padding:28px 17px;
+    padding:28px 0;
     display:flex;
     flex-direction:column;
     font-family: 'Lexend Deca',sans-serif;
     font-weight:400;
-    margin-bottom:65px;
+    margin-bottom:73px;
     margin-top:55px;
+    margin:55px auto 75px auto;
 
     h3{
         font-size:22.98px;
         color:#126BA5;
         margin-bottom:5px;
         margin-top:5px;
+        margin: 5px 20px;
     }
 
     span{
         font-size:17.98px;
         color:${props => props.progress ? "#bababa" : "#8FC549"};
+        margin: 2px 20px;
+
         
     }
 
-    div{
-        margin:10px auto;
-        width:100%;       
-    }
+    
 `;

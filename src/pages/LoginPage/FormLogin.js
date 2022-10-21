@@ -54,6 +54,7 @@ export default function FormLogin({ setUser }) {
                     placeholder="email"
                     disabled={loading}
                     required
+                    focus
                 />
             </label>
             <label htmlFor="password">

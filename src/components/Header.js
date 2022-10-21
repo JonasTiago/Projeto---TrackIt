@@ -30,8 +30,8 @@ const HeaderStyle = styled.div`
     }
     
     img{
-        width:55px;
-        height:55px;
+        width:51px;
+        height:51px;
         border-radius:100px;
     }
 `
