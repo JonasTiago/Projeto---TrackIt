@@ -17,6 +17,10 @@ const HeaderStyle = styled.div`
     justify-content:space-between;
     align-items:center;
     padding: 10px 18px;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:5;
     
     h1{
         color:#fff;

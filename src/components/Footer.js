@@ -2,10 +2,13 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
 import styled from "styled-components"
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserAuthContext } from "../constants/userAuth";
 
 
-export default function Footer() {
-    const porcentagem = 60;
+export default function Footer({}) {
+    const { performance } = useContext(UserAuthContext);
+
     return (
 
         <FooterStyle>
@@ -13,21 +16,23 @@ export default function Footer() {
                 Hábitos
             </Link>
             <div>
-                <CircularProgressbar
-                    value={porcentagem}
-                    text={`Hoje`}
-                    background
-                    backgroundPadding={6}
-                    styles={buildStyles({
-                        backgroundColor: "#52B6FF",
-                        textColor: "#fff",
-                        pathColor: "#fff",
-                        trailColor: "transparent",
-                        
-                    })}
-                />
+                <Link to={"/hoje"}>
+                    <CircularProgressbar
+                        value={performance}
+                        text={`Hoje`}
+                        background
+                        backgroundPadding={6}
+                        styles={buildStyles({
+                            backgroundColor: "#52B6FF",
+                            textColor: "#fff",
+                            pathColor: "#fff",
+                            trailColor: "transparent",
+
+                        })}
+                    />
+                </Link>
             </div>
-            <Link>
+            <Link to={"/historico"}>
                 Histórico
             </Link>
         </FooterStyle>
@@ -39,6 +44,7 @@ const FooterStyle = styled.footer`
     position:fixed;
     bottom: 0;
     left:0;
+    right:0;
     height:70px;
     width:100vw;
     display:flex;

@@ -1,11 +1,36 @@
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
+import { URLbase } from "../../constants/URL"
+import { UserAuthContext } from "../../constants/userAuth"
+// import Calendar from "react-calendar"
+// import 'react-calendar/dist/Calendar.css';
+
 
 export default function HistoryPage() {
+    const { user } = useContext(UserAuthContext)
+
+    //pegando historico
+    useEffect(() => {
+        const headers = {
+            'Authorization': `Bearer ${user.token}`
+        };
+        const url = `${URLbase}/habits/history/daily`;
+
+        axios.get(url, { headers })
+            .then(resp => {
+                console.log(resp.data)
+            }) //tudo ok
+            .catch(resp => console.log('deu erro'))//quando da erro, mudar depois
+    }, []);
+
+
+
     return (
         <>
-            <Header userImg={'https://s2.glbimg.com/5IEojOCGN6bgFV5L2K_RKB5dtvk=/e.glbimg.com/og/ed/f/original/2020/03/31/cat-4548812_960_720.jpg'} />
+            <Header userImg={user.image} />
             <HistoryPageStyle>
                 <h3>Histórico</h3>
                 <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span>
@@ -22,17 +47,23 @@ const HistoryPageStyle = styled.div`
         padding:5px 17px;
         font-family: 'Lexend Deca',sans-serif;
         font-weight:400;
+        margin-top: 65px;
 
         h3{
             color:#126BA5;
             font-size:22.98px;
             margin-bottom:20px;
             margin-top:28px;
-
+            
         }
 
         span{
             font-size:17.98px;
             color:#666;
+            margin-bottom:50px;
         }
+`;
+
+const CalendarStyle = styled.div`
+    /* color:green; */
 `

@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useState } from "react"
 import styled from "styled-components"
 import trash from "../../assets/images/trash.svg"
 import trashIn from "../../assets/images/trash2.svg"

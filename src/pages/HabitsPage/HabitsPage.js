@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserAuthContext } from "../../constants/userAuth";
 import { URLbase } from "../../constants/URL";
 import axios from "axios";
-import { SEMANA } from "../../constants/Semana"
+import { SEMANA } from "../../constants/SEMANA"
 
 export default function HabitsPage() {
     const { user } = useContext(UserAuthContext);
@@ -79,6 +79,8 @@ const HabitsPageStyle = styled.div`
     padding:5px 17px;
     font-family: 'Lexend Deca',sans-serif;
     font-weight:400;
+    margin-top:80px;
+    margin-bottom:100px;
 
     div{
         display:flex;
