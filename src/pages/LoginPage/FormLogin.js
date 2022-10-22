@@ -1,20 +1,20 @@
 import axios from "axios";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormStyle } from "../../constants/styles"
+import { FormStyle } from "../../constants/styles";
 import { URLbase } from "../../constants/URL";
 import styled from "styled-components";
 import { ThreeDots } from 'react-loader-spinner';
 
 export default function FormLogin({ setUser }) {
-    const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState(
         {
             email: "",
             password: ""
         }
-    )
+    );
 
     function fillIn(e) {
         setForm({
@@ -23,22 +23,22 @@ export default function FormLogin({ setUser }) {
         });
     };
 
+
+    // useEffect(() => {
+    //     if (localStorage.getItem('UserOn')) {
+    //         const dadosDeserializados = JSON.parse(localStorage.getItem('UserOn'));
+    //         setUser(dadosDeserializados);
+    //         setTimeout(navigate('/hoje'), 5000);
+    //     }
+    // }, []);
+
     
-    useEffect(() => {
-        if (localStorage.getItem('UserOn')) {
-            const dadosDeserializados = JSON.parse(localStorage.getItem('UserOn'))
-            console.log(dadosDeserializados)
-             setUser(dadosDeserializados)
-             setTimeout( navigate('/hoje'), 5000)
-        }
-    }, [])
-
     function login(e) {
-        e.preventDefault()
-        setLoading(true)
+        e.preventDefault();
+        setLoading(true);
 
-        const url = `${URLbase}/auth/login`
-        const body = form
+        const url = `${URLbase}/auth/login`;
+        const body = form;
 
         setTimeout(() => {
             axios.post(url, body)
@@ -52,8 +52,8 @@ export default function FormLogin({ setUser }) {
                     alert(resp.response.data.message)
                     setLoading(false)
                 })
-        }, 1000)
-    }
+        }, 1000);
+    };
 
     return (
         <FormStyle onSubmit={login}>
@@ -66,6 +66,7 @@ export default function FormLogin({ setUser }) {
                     placeholder="email"
                     disabled={loading}
                     required
+                    autoComplete="off"
                 />
             </label>
             <label htmlFor="password">
@@ -111,4 +112,4 @@ const BntStyle = styled.button`
         border-radius:5px;
         background-color: #52B6FF;
         opacity:0.7;
-`
+`;

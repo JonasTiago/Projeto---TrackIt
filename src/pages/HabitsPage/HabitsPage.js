@@ -1,35 +1,44 @@
-import styled from "styled-components"
-import FormHabits from "./FormHabits"
-import Habits from "./Habits"
+import styled from "styled-components";
+import FormHabits from "./FormHabits";
+import Habits from "./Habits";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { UserAuthContext } from "../../constants/userAuth";
 import { URLbase } from "../../constants/URL";
 import axios from "axios";
-import { SEMANA } from "../../constants/SEMANA"
+import { SEMANA } from "../../constants/SEMANA";
+import { useNavigate } from "react-router-dom";
 
 export default function HabitsPage() {
     const { user } = useContext(UserAuthContext);
-    const [add, setAdd] = useState(false)
-    const [habits, setHabits] = useState(false)
-    const [reload, setReload] = useState(false)
+    const [add, setAdd] = useState(false);
+    const [habits, setHabits] = useState(false);
+    const [reload, setReload] = useState(false);
     const useAtivo = user.token;
+    const navigate = useNavigate()
 
     function togglerForm() {
-        setAdd(add ? false : true)
-    }
+        setAdd(add ? false : true);
+    };
 
     useEffect(() => {
-        const url = `${URLbase}/habits`
-        axios.get(url, { headers: { Authorization: `Bearer ${user.token}` } })
+        const headers = { Authorization: `Bearer ${user.token}` };
+        const url = `${URLbase}/habits`;
+
+        axios.get(url, { headers })
             .then(resp => {
-                setHabits(resp.data)
-                setReload(false)
+                setHabits(resp.data);
+                // setReload(false)
             })
-            .catch(resp => console.log(resp))
+            .catch(resp => {
+                console.log(resp)
+                console.log('erro')
+                navigate("/")
+                
+            })
     }
-        , [reload])
+        , [reload]);
 
     return (
         <>
@@ -124,4 +133,4 @@ const HabitsPageStyle = styled.div`
         margin-bottom:110px;
         width:340px;
     }
-`
+`;

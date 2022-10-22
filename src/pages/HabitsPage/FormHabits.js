@@ -1,16 +1,16 @@
-import axios from "axios"
-import { useState } from "react"
-import styled from "styled-components"
-import { FormStyle } from "../../constants/styles"
-import { URLbase } from "../../constants/URL"
+import axios from "axios";
+import { useState } from "react";
+import styled from "styled-components";
+import { FormStyle } from "../../constants/styles";
+import { URLbase } from "../../constants/URL";
 import { ThreeDots } from 'react-loader-spinner';
 
 export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, SEMANA }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         days: []
-    })
+    });
     
     function fillIn(e) {
         setForm({
@@ -29,7 +29,7 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
     function createHabit(e) {
         e.preventDefault();
 
-        setLoading(true)
+        setLoading(true);
 
         const url = `${URLbase}/habits`;
         const body = form;
@@ -37,20 +37,20 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
         setTimeout(() => {
             axios.post(url, body, { headers: { Authorization: `Bearer ${useAtivo}` } })
                 .then(resp => {
-                    togglerForm()
+                    togglerForm();
                     setReload(true)
                     setForm({
                         name: "",
                         days: []
-                    })
-                    setLoading(false)
+                    });
+                    setLoading(false);
                 })
                 .catch(resp => {
                     console.log(resp.response.data.message && alert('Usuario Off'))
                     setLoading(false)
                 });
         }, 1000)
-    }
+    };
 
     return (
         <FormHabitsStyle onSubmit={createHabit}>

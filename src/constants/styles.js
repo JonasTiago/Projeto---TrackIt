@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 
 export const BodyStyle = styled.div`
@@ -10,10 +10,6 @@ export const BodyStyle = styled.div`
     width:100vw;
     height:100vh;
     padding-top:25px;
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    z-index:2; */
 
     img{
         width:180px;
@@ -68,4 +64,4 @@ export const FormStyle = styled.form`
         color:#fff;   
     }
 
-`
+`;

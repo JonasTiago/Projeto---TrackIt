@@ -1,25 +1,24 @@
-import axios from "axios"
-import styled from "styled-components"
-import trash from "../../assets/images/trash.svg"
-import trashIn from "../../assets/images/trash2.svg"
-import { URLbase } from "../../constants/URL"
+import axios from "axios";
+import styled from "styled-components";
+import trash from "../../assets/images/trash.svg";
+import trashIn from "../../assets/images/trash2.svg";
+import { URLbase } from "../../constants/URL";
 
 export default function Habits({ setReload, useAtivo, id, name, days, SEMANA }) {
 
     function deleteHabit(idHabit) {
         const headers = {
             'Authorization': `Bearer ${useAtivo}`
-        }
-        const url = `${URLbase}/habits/${idHabit}`
+        };
+        const url = `${URLbase}/habits/${idHabit}`;
 
         axios.delete(url, { headers })
-            .then(resp => {
-                
-                setReload(true)
+            .then(resp => {    
+                setReload(true);
             })
             .catch(resp => console.log(resp.response.data.message))
 
-    }
+    };
 
     return (
         <HabitsStyle>
@@ -81,7 +80,7 @@ const HabitsStyle = styled.div`
             color:#fff;
         }
     }
-`
+`;
 
 const TrashStyle = styled.div`
     position:absolute;
@@ -101,4 +100,4 @@ const TrashStyle = styled.div`
         right:11.5px;
         width:8px;
     }
-`
+`;

@@ -1,5 +1,5 @@
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar"
-import styled from "styled-components"
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import styled from "styled-components";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -10,7 +10,6 @@ export default function Footer({}) {
     const { performance } = useContext(UserAuthContext);
     
     return (
-
         <FooterStyle>
             <Link to={'/habitos'}>
                 Hábitos
@@ -64,6 +63,4 @@ const FooterStyle = styled.footer`
         height:91px;
         margin:0 auto 40px auto;
     }
-
-    
-`
+`;

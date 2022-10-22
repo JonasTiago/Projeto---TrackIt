@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function TodayHabit({ hab, useAtivo, setReload }) {
     const { currentSequence, done, highestSequence, name, id } = hab;
-    const [click, setClick] = useState(done)
+    const [click, setClick] = useState(done);
 
     function concluirHabito(idHabt, doneHabt) {
 
@@ -17,21 +17,22 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
 
         if (!doneHabt) {
 
-            const body = { done: true }
+            const body = { done: true };
             axios.post(`${url}/check`, body, { headers })
                 .then(resp => {
-                    setReload(true)
+                    setReload(true);
                 }) //tudo ok
                 .catch(resp => console.log('erro', resp.data))//quando da erro, mudar depois
+
         } else {
             const body = { done: false }
             axios.post(`${url}/uncheck`, body, { headers })
                 .then(resp => {
-                    setReload(true)
+                    setReload(true);
                 }) //tudo ok
                 .catch(resp => console.log('erro', resp.data))
-        }
-    }
+        };
+    };
 
 
 

@@ -1,16 +1,20 @@
-import axios from "axios"
-import { useContext, useEffect, useState } from "react"
-import styled from "styled-components"
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-import { URLbase } from "../../constants/URL"
-import { UserAuthContext } from "../../constants/userAuth"
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import { URLbase } from "../../constants/URL";
+import { UserAuthContext } from "../../constants/userAuth";
 // import Calendar from "react-calendar"
 // import 'react-calendar/dist/Calendar.css';
 
 
 export default function HistoryPage() {
-    const { user } = useContext(UserAuthContext)
+    const { user } = useContext(UserAuthContext);
+    const navigate = useNavigate()
+
+
 
     //pegando historico
     useEffect(() => {
@@ -23,7 +27,10 @@ export default function HistoryPage() {
             .then(resp => {
                 console.log(resp.data)
             }) //tudo ok
-            .catch(resp => console.log('deu erro'))//quando da erro, mudar depois
+            .catch(resp => {
+                console.log('deu erro')
+                navigate('/')
+            })//quando da erro, mudar depois
     }, []);
 
 
@@ -66,4 +73,5 @@ const HistoryPageStyle = styled.div`
 
 const CalendarStyle = styled.div`
     /* color:green; */
-`
+`;
+

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export default function Header ({userImg}){
     return (
@@ -34,4 +34,4 @@ const HeaderStyle = styled.div`
         height:51px;
         border-radius:100px;
     }
-`
+`;

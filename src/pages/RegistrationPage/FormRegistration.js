@@ -33,12 +33,13 @@ export default function FormRegistration() {
         const body = form;
 
         setTimeout(() => {
-        axios.post(url, body)
-            .then(resp => navigate("/"))
-            .catch(resp => {
-                alert(resp.response.data.message)
-                setLoading(false)
-            });}, 1000);
+            axios.post(url, body)
+                .then(resp => navigate("/"))
+                .catch(resp => {
+                    alert(resp.response.data.message)
+                    setLoading(false)
+                });
+        }, 1000);
     };
 
     return (
@@ -50,7 +51,10 @@ export default function FormRegistration() {
                     placeholder="email"
                     value={form.email}
                     onChange={fillIn}
-                    required disabled={loading} />
+                    autoComplete="off"
+                    required
+                    disabled={loading}
+                />
             </label>
             <label htmlFor="password">
                 <input
@@ -59,7 +63,8 @@ export default function FormRegistration() {
                     placeholder="senha"
                     value={form.password}
                     onChange={fillIn}
-                    required disabled={loading} />
+                    required
+                    disabled={loading} />
             </label>
             <label htmlFor="name">
                 <input
@@ -68,7 +73,10 @@ export default function FormRegistration() {
                     placeholder="nome"
                     value={form.name}
                     onChange={fillIn}
-                    required disabled={loading} />
+                    autoComplete="off"
+                    required
+                    disabled={loading}
+                />
             </label>
             <label htmlFor="image">
                 <input
@@ -77,7 +85,9 @@ export default function FormRegistration() {
                     placeholder="foto"
                     value={form.image}
                     onChange={fillIn}
-                    required disabled={loading} />
+                    required
+                    autoComplete="off"
+                    disabled={loading} />
             </label>
             <label htmlFor="cadastrar">
                 {!loading ? <input type="submit"
