@@ -85,7 +85,7 @@ export default function FormRegistration() {
                     placeholder="foto"
                     value={form.image}
                     onChange={fillIn}
-                    required
+                    // required
                     autoComplete="off"
                     disabled={loading} />
             </label>

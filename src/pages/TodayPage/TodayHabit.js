@@ -3,10 +3,12 @@ import ceta from "../../assets/images/Vector.svg";
 import axios from "axios";
 import { URLbase } from "../../constants/URL";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage }) {
     const { currentSequence, done, highestSequence, name, id } = hab;
     const [click, setClick] = useState(done);
+    const navigate = useNavigate()
 
     function concluirHabito(idHabt, doneHabt) {
 
@@ -24,7 +26,8 @@ export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage })
                     setReloadPage(!reloadPage);
                 }) //tudo ok
                 .catch(resp => {
-                    alert('erro', resp.data)
+                    alert(`${resp.response.data.message}, check apenas uma vez!`);
+                    navigate("/");
                 })//quando da erro, mudar depois
 
 
@@ -33,11 +36,12 @@ export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage })
             axios.post(`${url}/uncheck`, body, { headers })
                 .then(resp => {
                     //recarrega a page de hoje
-                    setReloadPage(!reloadPage)
+                    setReloadPage(!reloadPage);
 
                 }) //tudo ok
-                .catch(resp => {
-                    alert('erro', resp.data)
+                .catch(resp => {  
+                    alert(`${resp.response.data.message}, check apenas uma vez!`);
+                    navigate("/");
                 })
         };
     };

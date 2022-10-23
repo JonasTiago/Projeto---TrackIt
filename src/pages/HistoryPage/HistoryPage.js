@@ -1,22 +1,21 @@
 import axios from "axios";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Calendar } from "react-calendar";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import { URLbase } from "../../constants/URL";
 import { UserAuthContext } from "../../constants/userAuth";
 import 'react-calendar/dist/Calendar.css';
+import HistoricDay from "./HistoricDay";
 
 export default function HistoryPage() {
     const dayjs = require('dayjs');
     const { user } = useContext(UserAuthContext);
     const navigate = useNavigate();
-    const [value, setValue] = useState()
-
     const [dates, setDates] = useState([]);
-    const [days, setDays] = useState([])
+    const [days, setDays] = useState([]);
+    const [daySelect, setDaySelect] = useState([]);
 
     //pegando historico
     useEffect(() => {
@@ -24,24 +23,22 @@ export default function HistoryPage() {
             'Authorization': `Bearer ${user.token}`
         };
         const url = `${URLbase}/habits/history/daily`;
-
         axios.get(url, { headers }).then(resp => {
-
             setDates(resp.data.map(hist => hist.habits));
             // console.log(dates)
             // console.log(resp.data.map(hist => hist.habits))
             setDays(resp.data.map(hist => hist.day))
-
         }).catch(resp => {
-            console.log('deu erro')
-            navigate('/')
+            console.log('deu erro');
+            navigate('/');
         })//quando da erro, mudar depois
-    }, []);
-    
-    function tileClassName({ date, view }) {
         
+    }, []);
+
+    //seleciona os dias com historico
+    function tileClassName({ date, view }) {
         //Arry com os resultado dos dias 
-        const historyHabtsDone = dates.map(d => d.map(i => i.done)).map(i => i.includes(false))
+        const historyHabtsDone = dates.map(d => d.map(i => i.done)).map(i => i.includes(false));
         //forma o dia para verificação
         const dayNewFormat = dayjs(date).format('DD/MM/YYYY');
 
@@ -51,22 +48,37 @@ export default function HistoryPage() {
                 : ['classCompleted', 'claasDay'])
             : 'claasDay'
     }
+    //quando clica em um botão
+    function clickDay(value) {
+        
+        const day = dayjs(value).format('DD/MM/YYYY');
+        
+        if(days.includes(day)){
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            setDaySelect([...daySelect, day]);
+        }
+
+    }
+
 
     return (
-        <>
+        <div onChange={() => setDaySelect(daySelect.length > 0 && [])}>
             <Header userImg={user.image} />
             <HistoryPageStyle>
                 <h3>Histórico</h3>
-                { !(dates.length > 0) ?  <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span> :
-                <Calendar
-                    velue={value}
-                    onChange={setValue}
-                    calendarType={"US"}
-                    tileClassName={tileClassName}
-                />}
+                {!(dates.length > 0) ? <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span> :
+                    <Calendar
+                        calendarType={"US"}
+                        tileClassName={tileClassName}
+                        onChange={ clickDay }
+                    />}
             </HistoryPageStyle>
-            {/* <Footer /> */}
-        </>
+            {daySelect.length > 0 && <HistoricDay
+                setDaySelect={setDaySelect}
+                daySelect={daySelect}
+                dates={dates}
+                days={days} />}
+        </div>
     )
 }
 
@@ -111,7 +123,7 @@ const HistoryPageStyle = styled.div`
         }
         .classUnCompleted {
             border-radius:100px;
-            background-color:#e25b70 
+            background-color:#e25b70; 
 
         }
 
