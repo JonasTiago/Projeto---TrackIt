@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 import GlobalStyle from "./components/GlobalStyles";
+import Header from "./components/Header";
 import HabitsPage from "./pages/HabitsPage/HabitsPage";
 import HistoryPage from "./pages/HistoryPage/HistoryPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -18,6 +20,7 @@ function App() {
         <Route path="/hoje" element={<TodayPage />} />
         <Route path="/historico" element={<HistoryPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

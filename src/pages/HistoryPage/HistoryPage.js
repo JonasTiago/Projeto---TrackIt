@@ -27,7 +27,9 @@ export default function HistoryPage() {
 
         axios.get(url, { headers }).then(resp => {
 
-            setDates(resp.data);
+            setDates(resp.data.map(hist => hist.habits));
+            // console.log(dates)
+            // console.log(resp.data.map(hist => hist.habits))
             setDays(resp.data.map(hist => hist.day))
 
         }).catch(resp => {
@@ -35,37 +37,35 @@ export default function HistoryPage() {
             navigate('/')
         })//quando da erro, mudar depois
     }, []);
-
-    console.log(dates/*.map(hb => hb.habits).map(it => it)*/)
-    // dates.length > 0 && console.log(dates.map(dt => dt.habits).map(hb => hb.date))
-
-
-
+    
     function tileClassName({ date, view }) {
-
+        
+        //Arry com os resultado dos dias 
+        const historyHabtsDone = dates.map(d => d.map(i => i.done)).map(i => i.includes(false))
+        //forma o dia para verificação
         const dayNewFormat = dayjs(date).format('DD/MM/YYYY');
 
-        return view === 'month' && days.includes(dayNewFormat) && dayNewFormat !== dayjs().format("DD/MM/YYYY") ?
-            ['class', 'claasDay']
+        return view === 'month' && days.includes(dayNewFormat) && dayNewFormat !== dayjs().format("DD/MM/YYYY")
+            ? (historyHabtsDone[days.indexOf(dayNewFormat)] //verifica se os hbts foram comcluidos
+                ? ['classUnCompleted', 'claasDay']
+                : ['classCompleted', 'claasDay'])
             : 'claasDay'
     }
-
-
 
     return (
         <>
             <Header userImg={user.image} />
             <HistoryPageStyle>
                 <h3>Histórico</h3>
-                {/* <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span> */}
+                { !(dates.length > 0) ?  <span>Em breve você poderá ver o histórico dos seus hábitos aqui!</span> :
                 <Calendar
                     velue={value}
                     onChange={setValue}
                     calendarType={"US"}
                     tileClassName={tileClassName}
-                />
+                />}
             </HistoryPageStyle>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
@@ -84,8 +84,7 @@ const HistoryPageStyle = styled.div`
         h3{
             color:#126BA5;
             font-size:22.98px;
-            margin-bottom:20px;
-            margin-top:28px;
+            margin:28px 0 20px 0;
             
         }
 
@@ -102,12 +101,18 @@ const HistoryPageStyle = styled.div`
             height:402px;
 
             margin:auto;
+            border-radius:10px;
+            border:none;
         }
 
-        .class {
+        .classCompleted {
             background-color:#8ccb4f;
             border-radius:100px;
-            /* background-color:#e25b70 */
+        }
+        .classUnCompleted {
+            border-radius:100px;
+            background-color:#e25b70 
+
         }
 
         .claasDay{

@@ -22,16 +22,6 @@ export default function FormLogin({ setUser }) {
             [e.target.name]: e.target.value
         });
     };
-
-
-    // useEffect(() => {
-    //     if (localStorage.getItem('UserOn')) {
-    //         const dadosDeserializados = JSON.parse(localStorage.getItem('UserOn'));
-    //         setUser(dadosDeserializados);
-    //         setTimeout(navigate('/hoje'), 5000);
-    //     }
-    // }, []);
-
     
     function login(e) {
         e.preventDefault();

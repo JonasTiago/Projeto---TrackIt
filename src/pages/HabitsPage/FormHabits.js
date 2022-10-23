@@ -5,8 +5,8 @@ import { FormStyle } from "../../constants/styles";
 import { URLbase } from "../../constants/URL";
 import { ThreeDots } from 'react-loader-spinner';
 
-export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, SEMANA }) {
-    const [loading, setLoading] = useState(false);
+export default function FormHabits({ reloadPage, setReloadPage, setAdd, useAtivo, togglerForm, SEMANA }) {
+    const [loadingBtn, setLoadingBtn] = useState(false);
     const [form, setForm] = useState({
         name: "",
         days: []
@@ -29,25 +29,28 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
     function createHabit(e) {
         e.preventDefault();
 
-        setLoading(true);
+        setLoadingBtn(true);
 
         const url = `${URLbase}/habits`;
         const body = form;
+        setLoadingBtn(true);//botão e input desabilitada
+
 
         setTimeout(() => {
             axios.post(url, body, { headers: { Authorization: `Bearer ${useAtivo}` } })
                 .then(resp => {
+
+                    setLoadingBtn(false);//botão e input desabilitada
                     togglerForm();
-                    setReload(true)
                     setForm({
                         name: "",
                         days: []
                     });
-                    setLoading(false);
+                    setReloadPage(!reloadPage);//atualiza a pagina apos adifionar
                 })
                 .catch(resp => {
-                    console.log(resp.response.data.message && alert('Usuario Off'))
-                    setLoading(false)
+                    setLoadingBtn(false)
+                    alert('Usuario Off : '+resp.response.data.message)
                 });
         }, 1000)
     };
@@ -64,13 +67,13 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
                         required
                         autoComplete={'off'}
                         maxLength="25"
-                        disabled={loading}
+                        disabled={loadingBtn}
                     />
                 </label>
                 <label htmlFor="days">
                     {SEMANA.map(d => <ButtonSemanaStyle
                         clic={form.days.includes(d.id) ? true : false}
-                        disabled={loading}
+                        disabled={loadingBtn}
                         key={d.id}
                         type="button"
                         name='days'
@@ -81,7 +84,7 @@ export default function FormHabits({ setReload, setAdd, useAtivo, togglerForm, S
                 </label>
                 <label htmlFor="click">
                     <input type="button" name="click" value="Cancelar" onClick={() => setAdd(false)} />
-                    {!loading ?
+                    {!loadingBtn ?
                         <input type="submit" value="Salvar" name="click"/>
                         :
                         <BntStyle disabled>

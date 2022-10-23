@@ -6,11 +6,11 @@ import { useContext } from "react";
 import { UserAuthContext } from "../constants/userAuth";
 
 
-export default function Footer({}) {
-    const { performance } = useContext(UserAuthContext);
-    
+export default function Footer({ }) {
+    const { performance, user } = useContext(UserAuthContext);
+
     return (
-        <FooterStyle>
+        <FooterStyle login={user.name}>
             <Link to={'/habitos'}>
                 Hábitos
             </Link>
@@ -46,7 +46,7 @@ const FooterStyle = styled.footer`
     right:0;
     height:70px;
     width:100vw;
-    display:flex;
+    display:${props => props.login ? 'flex':'none' };
     align-items:center;
     justify-content:space-between;
     padding: 0 30px;

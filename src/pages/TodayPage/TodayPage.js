@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import TodayHabit from "./TodayHabit";
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { UserAuthContext } from "../../constants/userAuth";
 import axios from "axios";
@@ -12,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 export default function TodayPage() {
     const { user, performance, setPerformance, setUser } = useContext(UserAuthContext);
     const [habitsDay, setHabitsDay] = useState([]);
-    const [reload, setReload] = useState(false);
+    const [reloadPage, setReloadPage] = useState(false);
     const useAtivo = user.token;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const dayjs = require('dayjs');
     //numero do dia da semana
@@ -39,14 +38,12 @@ export default function TodayPage() {
             .then(resp => {
                 setHabitsDay(resp.data);
                 calculatePerformance(resp.data);
-                setReload(false);
-                console.log('oi')
             }) //tudo ok
             .catch(resp => {
-                console.log('deu erro '+resp)
+                console.log('deu erro ' + resp)
                 navigate('/')
             })//quando da erro, mudar depois
-    }, [reload]);
+    }, [reloadPage]);
 
     return (
         <>
@@ -59,10 +56,13 @@ export default function TodayPage() {
                 </div>
                 <div>
                     {habitsDay.map(hab =>
-                        <TodayHabit key={hab.id} hab={hab} useAtivo={useAtivo} setReload={setReload} />)}
+                        <TodayHabit key={hab.id}
+                            hab={hab}
+                            useAtivo={useAtivo}
+                            setReloadPage={setReloadPage}
+                            reloadPage={reloadPage} />)}
                 </div>
             </TodayStyle>
-            <Footer />
         </>
     );
 };

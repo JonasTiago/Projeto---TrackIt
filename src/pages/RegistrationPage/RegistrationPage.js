@@ -4,6 +4,9 @@ import FormRegistration from "./FormRegistration";
 import { Link } from "react-router-dom";
 
 export default function RegistrationPage() {
+
+    console.log('regist');
+    
     return (
         <BodyStyle>
             <img src={Logo} />

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import FormHabits from "./FormHabits";
 import Habits from "./Habits";
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import { useContext, useEffect, useState } from "react";
 import { UserAuthContext } from "../../constants/userAuth";
 import { URLbase } from "../../constants/URL";
@@ -14,14 +13,15 @@ export default function HabitsPage() {
     const { user } = useContext(UserAuthContext);
     const [add, setAdd] = useState(false);
     const [habits, setHabits] = useState(false);
-    const [reload, setReload] = useState(false);
+    const [reloadPage, setReloadPage] = useState(false);
     const useAtivo = user.token;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function togglerForm() {
         setAdd(add ? false : true);
     };
 
+    //recarega a pagina sempre que reloadPage mudar
     useEffect(() => {
         const headers = { Authorization: `Bearer ${user.token}` };
         const url = `${URLbase}/habits`;
@@ -29,17 +29,16 @@ export default function HabitsPage() {
         axios.get(url, { headers })
             .then(resp => {
                 setHabits(resp.data);
-                // setReload(false)
             })
             .catch(resp => {
-                console.log(resp)
-                console.log('erro')
+                alert(resp.response.data.message)
                 navigate("/")
-                
+
             })
     }
-        , [reload]);
+        , [reloadPage]);
 
+        
     return (
         <>
             <Header userImg={user.image} />
@@ -50,7 +49,8 @@ export default function HabitsPage() {
                 </div>
                 <div >
                     <FormHabits
-                        setReload={setReload}
+                        reloadPage={reloadPage}
+                        setReloadPage={setReloadPage}
                         SEMANA={SEMANA}
                         setAdd={setAdd}
                         useAtivo={useAtivo}
@@ -60,7 +60,8 @@ export default function HabitsPage() {
                 <>
                     {habits.length > 0 ?
                         habits.map(hab => <Habits
-                            setReload={setReload}
+                            reloadPage={reloadPage}
+                            setReloadPage={setReloadPage}
                             key={hab.id}
                             useAtivo={useAtivo}
                             id={hab.id}
@@ -75,7 +76,7 @@ export default function HabitsPage() {
                 </>
 
             </HabitsPageStyle>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

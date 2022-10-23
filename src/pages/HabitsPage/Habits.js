@@ -4,7 +4,7 @@ import trash from "../../assets/images/trash.svg";
 import trashIn from "../../assets/images/trash2.svg";
 import { URLbase } from "../../constants/URL";
 
-export default function Habits({ setReload, useAtivo, id, name, days, SEMANA }) {
+export default function Habits({ reloadPage, setReloadPage, useAtivo, id, name, days, SEMANA }) {
 
     function deleteHabit(idHabit) {
         const headers = {
@@ -14,12 +14,12 @@ export default function Habits({ setReload, useAtivo, id, name, days, SEMANA }) 
 
         axios.delete(url, { headers })
             .then(resp => {    
-                setReload(true);
+                setReloadPage(!reloadPage);
             })
-            .catch(resp => console.log(resp.response.data.message))
+            .catch(resp => alert(resp.response.data.message))
 
     };
-
+    
     return (
         <HabitsStyle>
             <h4>{name}</h4>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { URLbase } from "../../constants/URL";
 import { useState } from "react";
 
-export default function TodayHabit({ hab, useAtivo, setReload }) {
+export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage }) {
     const { currentSequence, done, highestSequence, name, id } = hab;
     const [click, setClick] = useState(done);
 
@@ -20,24 +20,30 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
             const body = { done: true };
             axios.post(`${url}/check`, body, { headers })
                 .then(resp => {
-                    setReload(true);
+                    //recarrega a page de hoje
+                    setReloadPage(!reloadPage);
                 }) //tudo ok
-                .catch(resp => console.log('erro', resp.data))//quando da erro, mudar depois
+                .catch(resp => {
+                    alert('erro', resp.data)
+                })//quando da erro, mudar depois
+
 
         } else {
             const body = { done: false }
             axios.post(`${url}/uncheck`, body, { headers })
                 .then(resp => {
-                    setReload(true);
+                    //recarrega a page de hoje
+                    setReloadPage(!reloadPage)
+
                 }) //tudo ok
-                .catch(resp => console.log('erro', resp.data))
+                .catch(resp => {
+                    alert('erro', resp.data)
+                })
         };
     };
-
-
-
+    
     return (
-        <HabitStyle estado={click} record={currentSequence == highestSequence}>
+        <HabitStyle estado={click} record={currentSequence == highestSequence} >
             <div>
                 <h4>{name}</h4>
                 <p>Sequência atual:  <span>{currentSequence} dias</span></p>
@@ -46,7 +52,9 @@ export default function TodayHabit({ hab, useAtivo, setReload }) {
             <button onClick={() => {
                 concluirHabito(id, done)
                 setClick(click ? false : true)
-                }}>
+
+            }}
+                >
                 <img src={ceta} />
             </button>
         </HabitStyle>
