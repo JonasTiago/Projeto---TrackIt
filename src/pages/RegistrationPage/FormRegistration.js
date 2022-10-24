@@ -28,10 +28,10 @@ export default function FormRegistration() {
     function register(e) {
         e.preventDefault();
         setLoading(true);
-
+        //espaço
         const url = `${URLbase}/auth/sign-up`;
         const body = form;
-
+        //time
         setTimeout(() => {
             axios.post(url, body)
                 .then(resp => navigate("/"))
@@ -54,6 +54,7 @@ export default function FormRegistration() {
                     autoComplete="off"
                     required
                     disabled={loading}
+                    data-identifier="input-email"
                 />
             </label>
             <label htmlFor="password">
@@ -64,7 +65,9 @@ export default function FormRegistration() {
                     value={form.password}
                     onChange={fillIn}
                     required
-                    disabled={loading} />
+                    disabled={loading}
+                    data-identifier="input-password"
+                />
             </label>
             <label htmlFor="name">
                 <input
@@ -76,6 +79,7 @@ export default function FormRegistration() {
                     autoComplete="off"
                     required
                     disabled={loading}
+                    data-identifier="input-name"
                 />
             </label>
             <label htmlFor="image">
@@ -87,13 +91,16 @@ export default function FormRegistration() {
                     onChange={fillIn}
                     // required
                     autoComplete="off"
-                    disabled={loading} />
+                    disabled={loading}
+                    data-identifier="input-photo"
+                />
             </label>
             <label htmlFor="cadastrar">
                 {!loading ? <input type="submit"
                     value="Cadastrar"
                     name="cadastrar"
-                    disabled={loading} />
+                    disabled={loading}
+                />
                     : <BntStyle disabled>
                         <ThreeDots
                             height="12"

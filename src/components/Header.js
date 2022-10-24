@@ -4,7 +4,7 @@ export default function Header ({userImg}){
     return (
         <HeaderStyle>
             <h1>TrackIt</h1>
-            <img src={userImg} />
+            <img src={userImg} data-identifier="avatar" alt="avatar"/>
         </HeaderStyle>
     )
 }

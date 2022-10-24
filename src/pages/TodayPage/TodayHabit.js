@@ -37,18 +37,20 @@ export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage })
                 .then(resp => {
                     //recarrega a page de hoje
                     setReloadPage(!reloadPage);
-
                 }) //tudo ok
-                .catch(resp => {  
+                .catch(resp => {
                     alert(`${resp.response.data.message}, check apenas uma vez!`);
                     navigate("/");
                 })
         };
     };
-    
+
     return (
-        <HabitStyle estado={click} record={currentSequence == highestSequence} >
-            <div>
+        <HabitStyle
+            estado={click}
+            record={currentSequence === highestSequence}
+            data-identifier="today-infos">
+            <div >
                 <h4>{name}</h4>
                 <p>Sequência atual:  <span>{currentSequence} dias</span></p>
                 <p>Seu recorde:  <span>{highestSequence} dias</span></p>
@@ -58,8 +60,9 @@ export default function TodayHabit({ hab, useAtivo, setReloadPage, reloadPage })
                 setClick(click ? false : true)
 
             }}
-                >
-                <img src={ceta} />
+                data-identifier="done-habit-btn"
+            >
+                <img src={ceta} alt="icon de confirmação"/>
             </button>
         </HabitStyle>
     )

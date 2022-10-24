@@ -13,17 +13,18 @@ export default function Habits({ reloadPage, setReloadPage, useAtivo, id, name, 
         const url = `${URLbase}/habits/${idHabit}`;
 
         axios.delete(url, { headers })
-            .then(resp => {    
+            .then(resp => {
                 setReloadPage(!reloadPage);
             })
             .catch(resp => alert(resp.response.data.message))
 
     };
-    
+
     return (
         <HabitsStyle>
-            <h4>{name}</h4>
-            <TrashStyle onClick={() => window.confirm("Deseja deletar esse habito?") && deleteHabit(id)}>
+            <h4 data-identifier="habit-name">{name}</h4>
+            <TrashStyle onClick={() => window.confirm("Deseja deletar esse habito?") && deleteHabit(id)}
+                data-identifier="delete-habit-btn">
                 <img src={trash} />
                 <img src={trashIn} />
             </TrashStyle>

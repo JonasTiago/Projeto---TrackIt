@@ -45,7 +45,7 @@ export default function HabitsPage() {
             <HabitsPageStyle visible={add}>
                 <div>
                     <h3>Meus hábitos</h3>
-                    <button onClick={togglerForm}>+</button>
+                    <button onClick={togglerForm} data-identifier="create-habit-btn">+</button>
                 </div>
                 <div >
                     <FormHabits
@@ -69,7 +69,7 @@ export default function HabitsPage() {
                             days={hab.days}
                             SEMANA={SEMANA} />)
                         :
-                        <span>
+                        <span data-identifier="no-habit-message">
                             Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                         </span>
                     }

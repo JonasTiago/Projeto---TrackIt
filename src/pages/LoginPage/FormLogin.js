@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FormStyle } from "../../constants/styles";
 import { URLbase } from "../../constants/URL";
@@ -22,14 +22,14 @@ export default function FormLogin({ setUser }) {
             [e.target.name]: e.target.value
         });
     };
-    
+
     function login(e) {
         e.preventDefault();
         setLoading(true);
-
+        //
         const url = `${URLbase}/auth/login`;
         const body = form;
-
+        //tempo para o efeito
         setTimeout(() => {
             axios.post(url, body)
                 .then(resp => {
@@ -49,14 +49,15 @@ export default function FormLogin({ setUser }) {
         <FormStyle onSubmit={login}>
             <label htmlFor="email">
                 <input
-                    type="email"
                     name="email"
+                    type="email"
                     value={form.email}
                     onChange={fillIn}
                     placeholder="email"
                     disabled={loading}
                     required
                     autoComplete="off"
+                    data-identifier="input-email"
                 />
             </label>
             <label htmlFor="password">
@@ -68,6 +69,7 @@ export default function FormLogin({ setUser }) {
                     placeholder="senha"
                     disabled={loading}
                     required
+                    data-identifier="input-password"
                 />
             </label>
             <label htmlFor="entrar">
@@ -75,6 +77,7 @@ export default function FormLogin({ setUser }) {
                     type="submit"
                     name="entrar"
                     value="Entrar"
+                    data-identifier="login-btn"
                 /> :
                     <BntStyle disabled>
                         <ThreeDots
@@ -86,6 +89,7 @@ export default function FormLogin({ setUser }) {
                             wrapperStyle={{}}
                             wrapperClassName=""
                             visible={true}
+                            data-identifier="login-btn"
                         />
                     </BntStyle>}
             </label>

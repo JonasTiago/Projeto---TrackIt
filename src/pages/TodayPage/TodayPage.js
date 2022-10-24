@@ -14,7 +14,6 @@ export default function TodayPage() {
     const [reloadPage, setReloadPage] = useState(false);
     const useAtivo = user.token;
     const navigate = useNavigate();
-
     const dayjs = require('dayjs');
     //numero do dia da semana
     const today = dayjs().day();
@@ -50,9 +49,10 @@ export default function TodayPage() {
             <Header userImg={user.image} />
             <TodayStyle progress={!(performance > 1)}>
                 <div>
-                    {SEMANA.map(d => d.id === today && <h3 key={d.id}> {d.nickName}, {todaydate}</h3>)}
-                    {!(performance > 1) ? <span>Nenhum hábito concluído ainda</span>
-                        : <span>{performance}% dos hábitos concluídos</span>}
+                    {SEMANA.map(d => d.id === today && <h3 key={d.id} data-identifier="today-infos"> {d.nickName}, {todaydate}</h3>)}
+                    {!(performance > 1)
+                        ? <span data-identifier="today-infos">Nenhum hábito concluído ainda</span>
+                        : <span data-identifier="today-infos">{performance}% dos hábitos concluídos</span>}
                 </div>
                 <div>
                     {habitsDay.map(hab =>

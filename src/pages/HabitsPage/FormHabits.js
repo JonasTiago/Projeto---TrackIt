@@ -11,7 +11,7 @@ export default function FormHabits({ reloadPage, setReloadPage, setAdd, useAtivo
         name: "",
         days: []
     });
-    
+
     function fillIn(e) {
         setForm({
             ...form,
@@ -50,7 +50,7 @@ export default function FormHabits({ reloadPage, setReloadPage, setAdd, useAtivo
                 })
                 .catch(resp => {
                     setLoadingBtn(false)
-                    alert('Usuario Off : '+resp.response.data.message)
+                    alert('Usuario Off : ' + resp.response.data.message)
                 });
         }, 1000)
     };
@@ -68,6 +68,7 @@ export default function FormHabits({ reloadPage, setReloadPage, setAdd, useAtivo
                         autoComplete={'off'}
                         maxLength="25"
                         disabled={loadingBtn}
+                        data-identifier="input-habit-name"
                     />
                 </label>
                 <label htmlFor="days">
@@ -78,14 +79,22 @@ export default function FormHabits({ reloadPage, setReloadPage, setAdd, useAtivo
                         type="button"
                         name='days'
                         value={d.id}
-                        onClick={(e) => fillDays(d.id)} required>
+                        onClick={(e) => fillDays(d.id)}
+                        required
+                        data-identifier="week-day-btn"
+                    >
                         {d.name}
                     </ButtonSemanaStyle>)}
                 </label>
                 <label htmlFor="click">
-                    <input type="button" name="click" value="Cancelar" onClick={() => setAdd(false)} />
+                    <input type="button"
+                        name="click"
+                        value="Cancelar"
+                        onClick={() => setAdd(false)}
+                        data-identifier="cancel-habit-create-btn"
+                    />
                     {!loadingBtn ?
-                        <input type="submit" value="Salvar" name="click"/>
+                        <input type="submit" value="Salvar" name="click" data-identifier="save-habit-create-btn" />
                         :
                         <BntStyle disabled>
                             <ThreeDots

@@ -11,7 +11,7 @@ export default function Footer({ }) {
 
     return (
         <FooterStyle login={user.name}>
-            <Link to={'/habitos'}>
+            <Link to={'/habitos'} ata-identifier="habit-page-action">
                 Hábitos
             </Link>
             <div>
@@ -31,7 +31,7 @@ export default function Footer({ }) {
                     />
                 </Link>
             </div>
-            <Link to={"/historico"}>
+            <Link to={"/historico"} data-identifier="historic-page-action">
                 Histórico
             </Link>
         </FooterStyle>

@@ -4,15 +4,12 @@ import FormRegistration from "./FormRegistration";
 import { Link } from "react-router-dom";
 
 export default function RegistrationPage() {
-
-    console.log('regist');
-    
     return (
         <BodyStyle>
-            <img src={Logo} />
+            <img src={Logo} alt='logo'/>
             <div>
                 <FormRegistration />
-                <Link to={"/"}>Já tem uma conta? Faça login!</Link>
+                <Link to={"/"} data-identifier="back-to-login-action">Já tem uma conta? Faça login!</Link>
             </div>
         </BodyStyle>
     )
