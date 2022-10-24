@@ -11,11 +11,15 @@ export default function HistoricDay({ setDaySelect, daySelect, dates, days }) {
                 <h5><span>{daySelect}</span></h5>
                 <ul>
                     {habitsDay.map((hab, i) => <div key={i}>
-                        {statHabs[i] ? <HabtOkStyle type={"checkbox"} onChange={() => statHabs[i]} 
-                        checked={true}
-                        /> :
-                            <HabtOvStyle type={"checkbox"}
-                            />}<li>{hab}</li>
+                        {statHabs[i] ? <HabtOkStyle type={"checkbox"}
+                            onChange={() => statHabs[i]}
+                            checked={true}
+                            
+                        />
+                            : <HabtOvStyle
+                                type={"checkbox"}
+                            />}
+                        <LiStyle star={statHabs[i]}>{hab}</LiStyle>
                     </div>)}
 
                 </ul>
@@ -61,10 +65,6 @@ const HistoricDayStyle = styled.div`
                 > div{
                     display:flex;  
 
-                    li{
-                        color:green;
-                        margin:6px 15px;
-                    }
                 }
             }
             
@@ -108,7 +108,7 @@ const HabtOkStyle = styled.input`
                             left: 9px;
                             }
                             
-`
+`;
 
 const HabtOvStyle = styled.input`
                         &&[type=checkbox] {
@@ -144,5 +144,12 @@ const HabtOvStyle = styled.input`
                             left: 9px;
                             color:red;
                             }
-`
+`;
 
+const LiStyle = styled.li`
+                    
+            color:${props => props.star ? "#8ccb4f" : "#e25b70"};
+            margin:6px 15px;
+                    
+`;
+ 
